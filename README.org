@@ -82,7 +82,29 @@ ENTRYPOINT ["ollama", "serve"]
 Supported variables:
 
 - `MODEL` (build variable)
+- `OLLAMA_HOST` (runtime variable)
 - `OLLAMA_NUM_PARALLEL` (runtime variable)
+
+*** LlamaCpp in Docker
+    
+#+begin_src Dockerfile
+
+FROM ghcr.io/ggerganov/llama.cpp:server
+
+# Create directories for the server and models
+RUN mkdir -p /app/models
+
+# Download model file into /app/models
+
+EXPOSE 8080
+
+# Command to run the server when the container starts
+ENTRYPOINT ["llama-server", "-m", "/app/models/llama-3.2-1b-instruct-q8_0.gguf", "-c", "2048"]
+
+
+#+end_src
+
+[[https://github.com/ggerganov/llama.cpp/blob/master/docs/docker.md][LlamaCpp Docker Documentation]]
 
 Let's port to Dagger and Publish to Google Cloud Registry
 
