@@ -23,3 +23,7 @@ graph LR
 
 #+end_src
 
+** Prior Art
+
+[[https://github.com/chiefkemist/model_packing_and_shipping/][Model Packing and Shipping]]
+
