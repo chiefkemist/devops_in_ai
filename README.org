@@ -27,3 +27,88 @@ graph LR
 
 [[https://github.com/chiefkemist/model_packing_and_shipping/][Model Packing and Shipping]]
 
+
+** Open Source Models
+
+*** Ollama
+
+#+begin_src bash
+
+brew install ollama
+
+ollama pull llama3.2
+
+ollama serve
+
+#+end_src
+
+*** LlamaCpp
+
+#+begin_src bash
+
+brew install llamacpp
+
+llama-server --hf-repo hugging-quants/Llama-3.2-1B-Instruct-Q8_0-GGUF --hf-file llama-3.2-1b-instruct-q8_0.gguf -c 2048
+
+#+end_src
+
+** Ollama in Docker
+
+#+begin_src Dockerfile
+
+FROM ollama/ollama:0.3.12
+
+# Listen on all interfaces, port 8080
+ENV OLLAMA_HOST 0.0.0.0:8080
+
+# Store model weight files in /models
+ENV OLLAMA_MODELS /models
+
+# Reduce logging verbosity
+ENV OLLAMA_DEBUG false
+
+# Never unload model weights from the GPU
+ENV OLLAMA_KEEP_ALIVE -1 
+
+# Store the model weights in the container image
+ENV MODEL gemma2:9b
+RUN ollama serve & sleep 5 && ollama pull $MODEL 
+
+# Start Ollama
+ENTRYPOINT ["ollama", "serve"]
+
+#+end_src
+
+Supported variables:
+
+- `MODEL` (build variable)
+- `OLLAMA_NUM_PARALLEL` (runtime variable)
+
+Let's port to Dagger and Publish to Google Cloud Registry
+
+** Dagger
+
+#+begin_src bash
+
+brew install dagger
+
+Example:
+dagger call --interactive function-name --project-path=./path-to-project-in-repo \
+   --src-dir=https://user:$GITHUB_TOKEN@github.com/user/reponame#branchname --image-name="gcr.io/organization/project/image-name"
+
+#+end_src
+
+
+** Deploy UI App
+
+#+begin_src bash
+
+npm run build
+
+cd client
+
+fly launch
+
+#+end_src
+
+
