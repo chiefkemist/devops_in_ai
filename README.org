@@ -1,0 +1,25 @@
+* DevOps in the Age of AI
+
+** Model Lifecycle
+
+#+begin_src mermaid
+
+graph LR
+    A[Model Training] --> B[Model Saving]
+    B --> C[Model + API Packaging - Docker Container]
+    C --> D[Serve via API]
+
+#+end_src
+
+
+** Model file format convertions (Optional)
+
+#+begin_src mermaid
+
+graph LR
+    A(Tensorflow H5 Model) --> B(Convert to ONNX) --> C(ONNX Model)
+    D(Pytorch PT Model) --> E(Convert to ONNX) --> F(ONNX Model)
+    G(Python's Pickle Model) --> G(Python's Pickle Model)
+
+#+end_src
+
