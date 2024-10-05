@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DevOps in the Age of AI</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= preload_link_tag "/stylesheets/main.css", type: "text/css" %>
+    <%= preload_link_tag "/js/main.js", type: "text/js" %>
+
+    <%= stylesheet_link_tag "main", src: "/css/main.css", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "main", src: "/js/main.js", type: "module", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body class="bg-indigo-50">
+    <%= yield %>
+  </body>
+</html>
+

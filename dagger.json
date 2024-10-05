@@ -1,0 +1,6 @@
+{
+  "name": "devops_in_ai",
+  "sdk": "go",
+  "source": "ci/dagger",
+  "engineVersion": "v0.13.3"
+}
